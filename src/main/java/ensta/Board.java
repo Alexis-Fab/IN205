@@ -1,5 +1,5 @@
 package ensta;
-
+import ships.*;
 
 public class Board {
 	public String name;
