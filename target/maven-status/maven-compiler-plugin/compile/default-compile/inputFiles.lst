@@ -1,1 +1,10 @@
+/home/alexis/Documents/IN205/bataille-navale/src/main/java/ensta/IBoard.java
 /home/alexis/Documents/IN205/bataille-navale/src/main/java/ensta/App.java
+/home/alexis/Documents/IN205/bataille-navale/src/main/java/ensta/ships/Orientation.java
+/home/alexis/Documents/IN205/bataille-navale/src/main/java/ensta/ships/AbstractShip.java
+/home/alexis/Documents/IN205/bataille-navale/src/main/java/ensta/ships/Carrier.java
+/home/alexis/Documents/IN205/bataille-navale/src/main/java/ensta/ships/Submarine.java
+/home/alexis/Documents/IN205/bataille-navale/src/main/java/ensta/TestBoard.java
+/home/alexis/Documents/IN205/bataille-navale/src/main/java/ensta/ships/Battleship.java
+/home/alexis/Documents/IN205/bataille-navale/src/main/java/ensta/Board.java
+/home/alexis/Documents/IN205/bataille-navale/src/main/java/ensta/ships/Destroyer.java

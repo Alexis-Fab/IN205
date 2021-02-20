@@ -1,4 +1,4 @@
-package ships;
+package ensta.ships;
 
 
 public class Destroyer extends AbstractShip

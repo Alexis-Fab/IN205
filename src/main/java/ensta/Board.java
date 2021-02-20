@@ -1,7 +1,7 @@
 package ensta;
-import ships.*;
+import ensta.ships.*;
 
-public class Board {
+class Board implements IBoard {
 	public String name;
 	private int boardSize = 10;
 	private int nbShips = 5;
@@ -13,28 +13,155 @@ public class Board {
 
 	public int getNbShips() { return(nbShips) ;}
 	public void setNbShips(int nb) { nbShips = nb ;}
-	public int getBoardSize() { return boardSize ;}
-	public void setBoardSize(int size) { boardSize = size ;}
+	public int getSize() { return boardSize ;}
+	public void setSize(int size) { boardSize = size ;}
 
-	private String printLine(int i)
+	public void putShip(AbstractShip ship, int x, int y)
+	{
+		if (x<=0 || y<=0 || x>this.boardSize || y>this.boardSize)
+			System.out.println("Votre navire ne peut pas être placé ici.\nVeuillez entrez des coordonnées comprises entre 1 et " + this.boardSize);
+		else {
+			boolean spaceAvailable = true;
+			switch(ship.getOrientation()) {
+				case NORTH:
+					if (x-ship.getSize() <= 0)
+					{
+						System.out.println("Votre navire " + ship.getName() + " dépasse de la grille par le haut, placez le plus bas.");
+						System.out.println("Pour rappel, la grille est de largeur " + this.boardSize + " cases.");
+						break;
+					}
+					for (int i=0; i < ship.getSize(); i++)
+						{
+							if (this.hasShip(x-i,y))
+							{
+								spaceAvailable = false;
+								break;
+							}
+						}
+					if (!spaceAvailable)
+					{
+						System.out.println("La place n'est pas libre pour " + ship.getName() + ", placez votre navire ailleurs.");
+						break;
+					}
+					else
+						for(int i=0; i < ship.getSize(); i++)
+							this.ships[x-i-1][y-1] = ship.getLabel();
+					break;
+				case WEST:
+					if (y-ship.getSize() <= 0)
+					{
+						System.out.println("Votre navire " + ship.getName() + " dépasse de la grille par la gauche, placez le plus à droite.");
+						System.out.println("Pour rappel, la grille est de largeur " + this.boardSize + " cases.");
+						break;
+					}
+					for (int i=0; i < ship.getSize(); i++)
+						{
+							if (this.hasShip(x,y-i))
+							{
+								spaceAvailable = false;
+								break;
+							}
+						}
+					if (!spaceAvailable)
+					{
+						System.out.println("La place n'est pas libre pour " + ship.getName() + ", placez votre navire ailleurs.");
+						break;
+					}
+					else
+						for (int i=0; i < ship.getSize(); i++)
+							this.ships[x-1][y-i-1] = ship.getLabel();
+					break;
+				case SOUTH:
+					if (x+ship.getSize() > this.boardSize)
+					{
+						System.out.println("Votre navire " + ship.getName() + " dépasse de la grille par le bas, placez le plus haut.");
+						System.out.println("Pour rappel, la grille est de largeur " + this.boardSize + " cases.");
+						break;
+					}
+					for (int i=0; i < ship.getSize(); i++)
+						{
+							if (this.hasShip(x+i,y))
+							{
+								spaceAvailable = false;
+								break;
+							}
+						}
+					if (!spaceAvailable)
+					{
+						System.out.println("La place n'est pas libre pour " + ship.getName() + ", placez votre navire ailleurs.");
+						break;
+					}
+					else
+						for (int i=0; i < ship.getSize(); i++)
+							this.ships[x+i-1][y-1] = ship.getLabel();
+					break;
+				case EAST:
+					if (y+ship.getSize() > this.boardSize)
+					{
+						System.out.println("Votre navire " + ship.getName() + " dépasse de la grille par la droite, placez le plus à gauche.");
+						System.out.println("Pour rappel, la grille est de largeur " + this.boardSize + " cases.");
+						break;
+					}
+					for (int i=0; i < ship.getSize(); i++)
+						{
+							if (this.hasShip(x,y+i))
+							{
+								spaceAvailable = false;
+								break;
+							}
+						}
+					if (!spaceAvailable)
+					{
+						System.out.println("La place n'est pas libre pour " + ship.getName() + ", placez votre navire ailleurs.");
+						break;
+					}
+					else
+						for (int i=0; i < ship.getSize(); i++)
+							this.ships[x-1][y+i-1] = ship.getLabel();
+					break;
+			}
+		}
+	}
+
+	public boolean hasShip(int x, int y)
+	{
+		return (ships[x-1][y-1] != '\u0000');
+	}
+
+	public void setHit(boolean hit, int x, int y)
+	{
+			strikes[x-1][y-1] = hit;
+	}
+
+	public Boolean getHit(int x, int y)
+	{
+		return ( strikes[x-1][y-1]);
+	}
+
+	private String printLine(int x)
 	{
 		String res = "";
-		if (i<10)
-			{ res = Integer.toString(i) + "  "; }
+		if (x<10)
+			{ res = Integer.toString(x) + "  "; }
 		else
-			{ res = Integer.toString(i) + " "; }
+			{ res = Integer.toString(x) + " "; }
 
-		for (int j = 0; j < this.boardSize; j++)
-		{ res = res + ". " ;}
+		for (int y = 0; y < this.boardSize; y++)
+		{
+			if (ships[x-1][y] == '\u0000')
+				res = res + ". ";
+			else
+				res = res + ships[x-1][y] + " ";
+		}
 
 		res = res + "    ";
 
-		if (i<10)
-			{ res = res + Integer.toString(i) + "  "; }
+		if (x<10)
+			{ res = res + Integer.toString(x) + "  "; }
 		else
-			{ res = res + Integer.toString(i) + " "; }
+			{ res = res + Integer.toString(x) + " "; }
 
-		for (int j = 0; j < this.boardSize; j++)
+		for (int y = 0; y < this.boardSize; y++)
 		{ res = res + ". " ;}
 
 		return(res);

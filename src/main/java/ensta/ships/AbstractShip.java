@@ -1,4 +1,5 @@
-package ships;
+package ensta.ships;
+import ensta.ships.Orientation;
 
 public class AbstractShip
 {
