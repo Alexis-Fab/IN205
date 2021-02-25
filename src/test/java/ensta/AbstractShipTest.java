@@ -40,8 +40,8 @@ public class AbstractShipTest
     public void testApp()
     {
         AbstractShip ShipTest = new AbstractShip("ShipTest", 'D', 2, Orientation.WEST);
-        assertEquals(2, ShipTest.getSize());
-        System.out.println("AbstractShip.getSize is operational");
+        assertEquals(2, ShipTest.getLength());
+        System.out.println("AbstractShip.getLength is operational");
         assertEquals(Orientation.WEST, ShipTest.getOrientation());
         System.out.println("AbstractShip.getOrientation is operational");
         ShipTest.setOrientation(Orientation.NORTH);

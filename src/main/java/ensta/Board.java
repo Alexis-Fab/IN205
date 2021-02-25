@@ -8,7 +8,8 @@ class Board implements IBoard {
 	private char[][] ships = new char[boardSize][boardSize];
 	private boolean[][] strikes = new boolean[boardSize][boardSize];
 
-	public Board(String myName, int myBoardSize) {name = myName; boardSize = myBoardSize;}
+	public Board(String myName, int myBoardSize) {name = myName; this.boardSize = myBoardSize;
+		ships = new char[boardSize][boardSize]; strikes = new boolean[boardSize][boardSize];}
 	public Board(String myName) {name = myName;}
 
 	public int getNbShips() { return(nbShips) ;}
@@ -16,21 +17,22 @@ class Board implements IBoard {
 	public int getSize() { return boardSize ;}
 	public void setSize(int size) { boardSize = size ;}
 
-	public void putShip(AbstractShip ship, int x, int y)
+	public void putShip(AbstractShip ship, int x, int y) throws Exception
 	{
+		boolean worked = false;
 		if (x<=0 || y<=0 || x>this.boardSize || y>this.boardSize)
 			System.out.println("Votre navire ne peut pas être placé ici.\nVeuillez entrez des coordonnées comprises entre 1 et " + this.boardSize);
 		else {
 			boolean spaceAvailable = true;
 			switch(ship.getOrientation()) {
 				case NORTH:
-					if (x-ship.getSize() <= 0)
+					if (x-ship.getLength() <= 0)
 					{
 						System.out.println("Votre navire " + ship.getName() + " dépasse de la grille par le haut, placez le plus bas.");
-						System.out.println("Pour rappel, la grille est de largeur " + this.boardSize + " cases.");
+						System.out.println("Pour rappel, la grille est de hauteur " + this.boardSize + " cases.");
 						break;
 					}
-					for (int i=0; i < ship.getSize(); i++)
+					for (int i=0; i < ship.getLength(); i++)
 						{
 							if (this.hasShip(x-i,y))
 							{
@@ -43,18 +45,20 @@ class Board implements IBoard {
 						System.out.println("La place n'est pas libre pour " + ship.getName() + ", placez votre navire ailleurs.");
 						break;
 					}
-					else
-						for(int i=0; i < ship.getSize(); i++)
+					else {
+						for(int i=0; i < ship.getLength(); i++)
 							this.ships[x-i-1][y-1] = ship.getLabel();
+						worked = true;
+					}
 					break;
 				case WEST:
-					if (y-ship.getSize() <= 0)
+					if (y-ship.getLength() <= 0)
 					{
 						System.out.println("Votre navire " + ship.getName() + " dépasse de la grille par la gauche, placez le plus à droite.");
 						System.out.println("Pour rappel, la grille est de largeur " + this.boardSize + " cases.");
 						break;
 					}
-					for (int i=0; i < ship.getSize(); i++)
+					for (int i=0; i < ship.getLength(); i++)
 						{
 							if (this.hasShip(x,y-i))
 							{
@@ -67,18 +71,20 @@ class Board implements IBoard {
 						System.out.println("La place n'est pas libre pour " + ship.getName() + ", placez votre navire ailleurs.");
 						break;
 					}
-					else
-						for (int i=0; i < ship.getSize(); i++)
+					else {
+						for (int i=0; i < ship.getLength(); i++)
 							this.ships[x-1][y-i-1] = ship.getLabel();
+						worked = true;
+					}
 					break;
 				case SOUTH:
-					if (x+ship.getSize() > this.boardSize)
+					if (x+ship.getLength() > this.boardSize)
 					{
 						System.out.println("Votre navire " + ship.getName() + " dépasse de la grille par le bas, placez le plus haut.");
-						System.out.println("Pour rappel, la grille est de largeur " + this.boardSize + " cases.");
+						System.out.println("Pour rappel, la grille est de hauteur " + this.boardSize + " cases.");
 						break;
 					}
-					for (int i=0; i < ship.getSize(); i++)
+					for (int i=0; i < ship.getLength(); i++)
 						{
 							if (this.hasShip(x+i,y))
 							{
@@ -91,18 +97,20 @@ class Board implements IBoard {
 						System.out.println("La place n'est pas libre pour " + ship.getName() + ", placez votre navire ailleurs.");
 						break;
 					}
-					else
-						for (int i=0; i < ship.getSize(); i++)
+					else {
+						for (int i=0; i < ship.getLength(); i++)
 							this.ships[x+i-1][y-1] = ship.getLabel();
+						worked = true;
+					}
 					break;
 				case EAST:
-					if (y+ship.getSize() > this.boardSize)
+					if (y+ship.getLength() > this.boardSize)
 					{
 						System.out.println("Votre navire " + ship.getName() + " dépasse de la grille par la droite, placez le plus à gauche.");
 						System.out.println("Pour rappel, la grille est de largeur " + this.boardSize + " cases.");
 						break;
 					}
-					for (int i=0; i < ship.getSize(); i++)
+					for (int i=0; i < ship.getLength(); i++)
 						{
 							if (this.hasShip(x,y+i))
 							{
@@ -115,12 +123,16 @@ class Board implements IBoard {
 						System.out.println("La place n'est pas libre pour " + ship.getName() + ", placez votre navire ailleurs.");
 						break;
 					}
-					else
-						for (int i=0; i < ship.getSize(); i++)
+					else {
+						for (int i=0; i < ship.getLength(); i++)
 							this.ships[x-1][y+i-1] = ship.getLabel();
+						worked = true;
+					}
 					break;
 			}
 		}
+		if (!worked)
+			throw new Exception("Ship couldn't be placed");
 	}
 
 	public boolean hasShip(int x, int y)
@@ -146,12 +158,12 @@ class Board implements IBoard {
 		else
 			{ res = Integer.toString(x) + " "; }
 
-		for (int y = 0; y < this.boardSize; y++)
+		for (int y = 1; y <= this.boardSize; y++)
 		{
-			if (ships[x-1][y] == '\u0000')
+			if (ships[x-1][y-1] == '\u0000')
 				res = res + ". ";
 			else
-				res = res + ships[x-1][y] + " ";
+				res = res + ships[x-1][y-1] + " ";
 		}
 
 		res = res + "    ";
@@ -161,24 +173,22 @@ class Board implements IBoard {
 		else
 			{ res = res + Integer.toString(x) + " "; }
 
-		for (int y = 0; y < this.boardSize; y++)
+		for (int y = 1; y <= this.boardSize; y++)
 		{ res = res + ". " ;}
 
 		return(res);
 	}
 	public void print() {
-		System.out.println("Navires :                  Frappes :");
-		System.out.println("   A B C D E F G H I J        A B C D E F G H I J");
-		System.out.println(printLine(1));
-		System.out.println(printLine(2));
-		System.out.println(printLine(3));
-		System.out.println(printLine(4));
-		System.out.println(printLine(5));
-		System.out.println(printLine(6));
-		System.out.println(printLine(7));
-		System.out.println(printLine(8));
-		System.out.println(printLine(9));
-		System.out.println(printLine(10));
-		
+		System.out.println("Navires :  " + "  ".repeat(this.getSize()-2) + "Frappes :");
+		String abscisse = "   ";
+		for (int i=0; i < this.getSize(); i++)
+		{
+			char c = (char) (65 + i);
+			abscisse += c + " ";	
+		}
+		abscisse = abscisse + "    " + abscisse;
+		System.out.println(abscisse);
+		for (int i = 1; i <= this.getSize(); i++)
+			System.out.println(printLine(i));
 	}
 }

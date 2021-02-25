@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="ensta.AppTest" time="0.038" tests="1" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="ensta.AppTest" time="0.04" tests="1" errors="0" skipped="0" failures="0">
   <properties>
     <property name="sun.desktop" value="gnome"/>
     <property name="awt.toolkit" value="sun.awt.X11.XToolkit"/>
@@ -16,7 +16,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="FR"/>
     <property name="sun.boot.library.path" value="/usr/lib/jvm/java-11-openjdk-amd64/lib"/>
-    <property name="sun.java.command" value="/home/alexis/Documents/IN205/bataille-navale/target/surefire/surefirebooter9949026643803404841.jar /home/alexis/Documents/IN205/bataille-navale/target/surefire 2021-02-20T14-16-45_701-jvmRun1 surefire13595622939174603236tmp surefire_02809715566350151873tmp"/>
+    <property name="sun.java.command" value="/home/alexis/Documents/IN205/bataille-navale/target/surefire/surefirebooter10513737095501585634.jar /home/alexis/Documents/IN205/bataille-navale/target/surefire 2021-02-25T23-49-34_057-jvmRun1 surefire759341058137172425tmp surefire_02605643068821548734tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="/home/alexis/Documents/IN205/bataille-navale/target/test-classes:/home/alexis/Documents/IN205/bataille-navale/target/classes:/home/alexis/.m2/repository/junit/junit/4.13.1/junit-4.13.1.jar:/home/alexis/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -32,7 +32,7 @@
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.awt.graphicsenv" value="sun.awt.X11GraphicsEnvironment"/>
-    <property name="surefire.real.class.path" value="/home/alexis/Documents/IN205/bataille-navale/target/surefire/surefirebooter9949026643803404841.jar"/>
+    <property name="surefire.real.class.path" value="/home/alexis/Documents/IN205/bataille-navale/target/surefire/surefirebooter10513737095501585634.jar"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="11.0.10+9-Ubuntu-0ubuntu1.18.04"/>
     <property name="user.name" value="alexis"/>
@@ -57,5 +57,5 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="55.0"/>
   </properties>
-  <testcase name="testApp" classname="ensta.AppTest" time="0.003"/>
+  <testcase name="testApp" classname="ensta.AppTest" time="0.004"/>
 </testsuite>
