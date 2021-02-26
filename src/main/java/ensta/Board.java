@@ -5,11 +5,11 @@ class Board implements IBoard {
 	public String name;
 	private int boardSize = 10;
 	private int nbShips = 5;
-	private char[][] ships = new char[boardSize][boardSize];
-	private boolean[][] strikes = new boolean[boardSize][boardSize];
+	private ShipState[][] ships = new ShipState[boardSize][boardSize];
+	private Boolean[][] strikes = new Boolean[boardSize][boardSize];
 
 	public Board(String myName, int myBoardSize) {name = myName; this.boardSize = myBoardSize;
-		ships = new char[boardSize][boardSize]; strikes = new boolean[boardSize][boardSize];}
+		ships = new ShipState[boardSize][boardSize]; strikes = new Boolean[boardSize][boardSize];}
 	public Board(String myName) {name = myName;}
 
 	public int getNbShips() { return(nbShips) ;}
@@ -26,7 +26,7 @@ class Board implements IBoard {
 			boolean spaceAvailable = true;
 			switch(ship.getOrientation()) {
 				case NORTH:
-					if (x-ship.getLength() <= 0)
+					if (x-ship.getLength() < 0)
 					{
 						System.out.println("Votre navire " + ship.getName() + " dépasse de la grille par le haut, placez le plus bas.");
 						System.out.println("Pour rappel, la grille est de hauteur " + this.boardSize + " cases.");
@@ -46,13 +46,14 @@ class Board implements IBoard {
 						break;
 					}
 					else {
-						for(int i=0; i < ship.getLength(); i++)
-							this.ships[x-i-1][y-1] = ship.getLabel();
+						for(int i=0; i < ship.getLength(); i++) {
+							(this.ships[x-i-1][y-1]) = new ShipState(ship);
+						}
 						worked = true;
 					}
 					break;
 				case WEST:
-					if (y-ship.getLength() <= 0)
+					if (y-ship.getLength() < 0)
 					{
 						System.out.println("Votre navire " + ship.getName() + " dépasse de la grille par la gauche, placez le plus à droite.");
 						System.out.println("Pour rappel, la grille est de largeur " + this.boardSize + " cases.");
@@ -73,12 +74,12 @@ class Board implements IBoard {
 					}
 					else {
 						for (int i=0; i < ship.getLength(); i++)
-							this.ships[x-1][y-i-1] = ship.getLabel();
+							this.ships[x-1][y-i-1] = new ShipState(ship);
 						worked = true;
 					}
 					break;
 				case SOUTH:
-					if (x+ship.getLength() > this.boardSize)
+					if (x+ship.getLength()-1 > this.boardSize)
 					{
 						System.out.println("Votre navire " + ship.getName() + " dépasse de la grille par le bas, placez le plus haut.");
 						System.out.println("Pour rappel, la grille est de hauteur " + this.boardSize + " cases.");
@@ -99,12 +100,12 @@ class Board implements IBoard {
 					}
 					else {
 						for (int i=0; i < ship.getLength(); i++)
-							this.ships[x+i-1][y-1] = ship.getLabel();
+							this.ships[x+i-1][y-1] = new ShipState(ship);
 						worked = true;
 					}
 					break;
 				case EAST:
-					if (y+ship.getLength() > this.boardSize)
+					if (y+ship.getLength()-1 > this.boardSize)
 					{
 						System.out.println("Votre navire " + ship.getName() + " dépasse de la grille par la droite, placez le plus à gauche.");
 						System.out.println("Pour rappel, la grille est de largeur " + this.boardSize + " cases.");
@@ -125,19 +126,21 @@ class Board implements IBoard {
 					}
 					else {
 						for (int i=0; i < ship.getLength(); i++)
-							this.ships[x-1][y+i-1] = ship.getLabel();
+							this.ships[x-1][y+i-1] = new ShipState(ship);
 						worked = true;
 					}
 					break;
 			}
 		}
-		if (!worked)
+		if (!worked) {
+			System.out.println("Placement failed");
 			throw new Exception("Ship couldn't be placed");
+		}
 	}
 
 	public boolean hasShip(int x, int y)
 	{
-		return (ships[x-1][y-1] != '\u0000');
+		return (ships[x-1][y-1] != null);
 	}
 
 	public void setHit(boolean hit, int x, int y)
@@ -160,7 +163,8 @@ class Board implements IBoard {
 
 		for (int y = 1; y <= this.boardSize; y++)
 		{
-			if (ships[x-1][y-1] == '\u0000')
+//			System.out.println(ships[x-1][y-1]);
+			if (ships[x-1][y-1] == null)
 				res = res + ". ";
 			else
 				res = res + ships[x-1][y-1] + " ";
@@ -169,12 +173,18 @@ class Board implements IBoard {
 		res = res + "    ";
 
 		if (x<10)
-			{ res = res + Integer.toString(x) + "  "; }
+			{ res = res + Integer.toString(x) + "  " ;}
 		else
-			{ res = res + Integer.toString(x) + " "; }
+			{ res = res + Integer.toString(x) + " " ;}
 
-		for (int y = 1; y <= this.boardSize; y++)
-		{ res = res + ". " ;}
+		for (int y = 1; y <= this.boardSize; y++) {
+				if (this.strikes[x-1][y-1] == null)
+					res = res + ". " ;
+				else if (this.strikes[x-1][y-1])
+					res = res + ColorUtil.colorize("X ", Color.RED) ;
+				else
+					res = res + "X " ;
+			}
 
 		return(res);
 	}
