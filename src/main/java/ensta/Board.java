@@ -5,7 +5,7 @@ class Board implements IBoard {
 	public String name;
 	private int boardSize = 10;
 	private int nbShips = 5;
-	private ShipState[][] ships = new ShipState[boardSize][boardSize];
+	public ShipState[][] ships = new ShipState[boardSize][boardSize];
 	private Boolean[][] strikes = new Boolean[boardSize][boardSize];
 
 	public Board(String myName, int myBoardSize) {name = myName; this.boardSize = myBoardSize;
@@ -140,7 +140,7 @@ class Board implements IBoard {
 
 	public boolean hasShip(int x, int y)
 	{
-		return (ships[x-1][y-1] != null);
+		return (ships[x-1][y-1] != null && !ships[x-1][y-1].isSunk());
 	}
 
 	public void setHit(boolean hit, int x, int y)
@@ -153,6 +153,25 @@ class Board implements IBoard {
 		return ( strikes[x-1][y-1]);
 	}
 
+	public Hit sendHit(int x, int y) {
+		if (this.ships[x-1][y-1] == null)
+			return(Hit.MISS);
+		else {
+			this.ships[x-1][y-1].addStrike();
+			if (this.ships[x-1][y-1].isSunk())
+				switch(this.ships[x-1][y-1].getShip().getLabel()) {
+					case('D'):
+						return Hit.DESTROYER;
+					case('S'):
+						return Hit.SUBMARINE;
+					case('B'):
+						return Hit.BATTLESHIP;
+					case('C'):
+						return Hit.CARRIER;
+				}
+			return(Hit.STRIKE);
+		}
+	}
 	private String printLine(int x)
 	{
 		String res = "";

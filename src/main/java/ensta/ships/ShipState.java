@@ -15,6 +15,7 @@ public class ShipState {
 	}
 
 	public void addStrike() {
+		this.struck = true;
 		shipRef.addStrike();
 	};
 	public boolean isStruck() {

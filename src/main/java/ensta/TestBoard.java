@@ -23,7 +23,7 @@ public class TestBoard
 //		myBoard.putShip(Kam5, 2, 1);
 		myBoard.setHit(true, 5, 1);
 		myBoard.setHit(false, 8, 6);
-//		myBoard.print();
+			myBoard.print();
 		List<AbstractShip> ships = new ArrayList<>();
 		ships.add(Kamikaze);
 		ships.add(Kam2);
@@ -33,6 +33,17 @@ public class TestBoard
 
 		Board emptyBoard = new Board("Empty", 10);
 		Player user1 = new Player(emptyBoard, myBoard, ships);
+
+		for (int i=0; i<5; i++) {
+			System.out.println("tir n° " + i);
+			user1.sendHit();
+//			System.out.println(user1.opponentBoard.ships[5][6]);
+			if (user1.opponentBoard.ships[5][6] != null) {
+//				System.out.println(user1.opponentBoard.ships[5][6].isStruck());
+				System.out.println(user1.opponentBoard.ships[5][6].isSunk());
+			}
+			System.out.println(user1.opponentBoard.hasShip(6,7));
+		}
 
 
 		user1.putShips();

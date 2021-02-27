@@ -67,25 +67,44 @@ public class Player {
                 System.out.println("Veuillez de nouveau " + msg);
             }
 
-            done = i == 5; // adapt it to meet ship number
+            done = i == this.board.getNbShips(); // I should adapt it to meet ship number
 
             board.print();
         } while (!done);
     }
 
-    public Hit sendHit(int[] coords) {
+    public Hit sendHit(/*int[] coords*/) {
+    // A-t-on vraiment besoin de coords si on fait appel à setHit dans sendHit ???
         boolean done = false;
         Hit hit = null;
 
         do {
-            System.out.println("où frapper?");
+            System.out.println("Où frapper ?");
             InputHelper.CoordInput hitInput = InputHelper.readCoordInput();
             // TODO call sendHit on this.opponentBoard
 
+            if (this.board.getHit(hitInput.x, hitInput.y) == null) {
+
+                hit = this.opponentBoard.sendHit(hitInput.x, hitInput.y);
+                if (hit != Hit.MISS) {
+                    this.board.setHit(true, hitInput.x, hitInput.y);
+                    done = true;
+                }
+                else {
+                    this.board.setHit(false, hitInput.x, hitInput.y);
+                    done = true;
+                }
+            }
+
+            else {
+                System.out.println("Vous avez déjà tiré ici !");
+            }
             // TODO : Game expects sendHit to return BOTH hit result & hit coords.
             // return hit is obvious. But how to return coords at the same time ?
         } while (!done);
 
+        this.board.print();
+        System.out.println(hit);
         return hit;
     }
 
