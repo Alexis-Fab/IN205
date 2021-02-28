@@ -17,19 +17,27 @@ class Board implements IBoard {
 	public int getSize() { return boardSize ;}
 	public void setSize(int size) { boardSize = size ;}
 
-	public void putShip(AbstractShip ship, int x, int y) throws Exception
+	private void printHelp(boolean isForHuman, String msg) {
+		if (isForHuman)
+			System.out.println(msg);
+	}
+	public void putShip(AbstractShip ship, int x, int y) throws Exception {
+		putShip(ship, x, y, true);
+	}
+	
+	public void putShip(AbstractShip ship, int x, int y, boolean isForHuman) throws Exception
 	{
 		boolean worked = false;
-		if (x<=0 || y<=0 || x>this.boardSize || y>this.boardSize)
-			System.out.println("Votre navire ne peut pas être placé ici.\nVeuillez entrez des coordonnées comprises entre 1 et " + this.boardSize);
+		if (x<0 || y<0 || x>=this.boardSize || y>=this.boardSize)
+			printHelp(isForHuman, "Votre navire ne peut pas être placé ici.\nVeuillez entrez des coordonnées comprises entre 1 et " + this.boardSize);
 		else {
 			boolean spaceAvailable = true;
 			switch(ship.getOrientation()) {
 				case NORTH:
-					if (x-ship.getLength() < 0)
+					if (x-ship.getLength()+1 < 0)
 					{
-						System.out.println("Votre navire " + ship.getName() + " dépasse de la grille par le haut, placez le plus bas.");
-						System.out.println("Pour rappel, la grille est de hauteur " + this.boardSize + " cases.");
+						printHelp(isForHuman, "Votre navire " + ship.getName() + " dépasse de la grille par le haut, placez le plus bas.");
+						printHelp(isForHuman, "Pour rappel, la grille est de hauteur " + this.boardSize + " cases.");
 						break;
 					}
 					for (int i=0; i < ship.getLength(); i++)
@@ -42,21 +50,21 @@ class Board implements IBoard {
 						}
 					if (!spaceAvailable)
 					{
-						System.out.println("La place n'est pas libre pour " + ship.getName() + ", placez votre navire ailleurs.");
+						printHelp(isForHuman, "La place n'est pas libre pour " + ship.getName() + ", placez votre navire ailleurs.");
 						break;
 					}
 					else {
 						for(int i=0; i < ship.getLength(); i++) {
-							(this.ships[x-i-1][y-1]) = new ShipState(ship);
+							(this.ships[x-i][y]) = new ShipState(ship);
 						}
 						worked = true;
 					}
 					break;
 				case WEST:
-					if (y-ship.getLength() < 0)
+					if (y-ship.getLength()+1 < 0)
 					{
-						System.out.println("Votre navire " + ship.getName() + " dépasse de la grille par la gauche, placez le plus à droite.");
-						System.out.println("Pour rappel, la grille est de largeur " + this.boardSize + " cases.");
+						printHelp(isForHuman, "Votre navire " + ship.getName() + " dépasse de la grille par la gauche, placez le plus à droite.");
+						printHelp(isForHuman, "Pour rappel, la grille est de largeur " + this.boardSize + " cases.");
 						break;
 					}
 					for (int i=0; i < ship.getLength(); i++)
@@ -69,20 +77,20 @@ class Board implements IBoard {
 						}
 					if (!spaceAvailable)
 					{
-						System.out.println("La place n'est pas libre pour " + ship.getName() + ", placez votre navire ailleurs.");
+						printHelp(isForHuman, "La place n'est pas libre pour " + ship.getName() + ", placez votre navire ailleurs.");
 						break;
 					}
 					else {
 						for (int i=0; i < ship.getLength(); i++)
-							this.ships[x-1][y-i-1] = new ShipState(ship);
+							this.ships[x][y-i] = new ShipState(ship);
 						worked = true;
 					}
 					break;
 				case SOUTH:
-					if (x+ship.getLength()-1 > this.boardSize)
+					if (x+ship.getLength()-1 >= this.boardSize)
 					{
-						System.out.println("Votre navire " + ship.getName() + " dépasse de la grille par le bas, placez le plus haut.");
-						System.out.println("Pour rappel, la grille est de hauteur " + this.boardSize + " cases.");
+						printHelp(isForHuman, "Votre navire " + ship.getName() + " dépasse de la grille par le bas, placez le plus haut.");
+						printHelp(isForHuman, "Pour rappel, la grille est de hauteur " + this.boardSize + " cases.");
 						break;
 					}
 					for (int i=0; i < ship.getLength(); i++)
@@ -95,20 +103,20 @@ class Board implements IBoard {
 						}
 					if (!spaceAvailable)
 					{
-						System.out.println("La place n'est pas libre pour " + ship.getName() + ", placez votre navire ailleurs.");
+						printHelp(isForHuman, "La place n'est pas libre pour " + ship.getName() + ", placez votre navire ailleurs.");
 						break;
 					}
 					else {
 						for (int i=0; i < ship.getLength(); i++)
-							this.ships[x+i-1][y-1] = new ShipState(ship);
+							this.ships[x+i][y] = new ShipState(ship);
 						worked = true;
 					}
 					break;
 				case EAST:
-					if (y+ship.getLength()-1 > this.boardSize)
+					if (y+ship.getLength()-1 >= this.boardSize)
 					{
-						System.out.println("Votre navire " + ship.getName() + " dépasse de la grille par la droite, placez le plus à gauche.");
-						System.out.println("Pour rappel, la grille est de largeur " + this.boardSize + " cases.");
+						printHelp(isForHuman, "Votre navire " + ship.getName() + " dépasse de la grille par la droite, placez le plus à gauche.");
+						printHelp(isForHuman, "Pour rappel, la grille est de largeur " + this.boardSize + " cases.");
 						break;
 					}
 					for (int i=0; i < ship.getLength(); i++)
@@ -121,45 +129,45 @@ class Board implements IBoard {
 						}
 					if (!spaceAvailable)
 					{
-						System.out.println("La place n'est pas libre pour " + ship.getName() + ", placez votre navire ailleurs.");
+						printHelp(isForHuman, "La place n'est pas libre pour " + ship.getName() + ", placez votre navire ailleurs.");
 						break;
 					}
 					else {
 						for (int i=0; i < ship.getLength(); i++)
-							this.ships[x-1][y+i-1] = new ShipState(ship);
+							this.ships[x][y+i] = new ShipState(ship);
 						worked = true;
 					}
 					break;
 			}
 		}
 		if (!worked) {
-			System.out.println("Placement failed");
+			printHelp(isForHuman, "Placement failed");
 			throw new Exception("Ship couldn't be placed");
 		}
 	}
 
 	public boolean hasShip(int x, int y)
 	{
-		return (ships[x-1][y-1] != null && !ships[x-1][y-1].isSunk());
+		return (ships[x][y] != null && !ships[x][y].isSunk());
 	}
 
 	public void setHit(boolean hit, int x, int y)
 	{
-			strikes[x-1][y-1] = hit;
+			strikes[x][y] = hit;
 	}
 
 	public Boolean getHit(int x, int y)
 	{
-		return ( strikes[x-1][y-1]);
+		return ( strikes[x][y]);
 	}
 
 	public Hit sendHit(int x, int y) {
-		if (this.ships[x-1][y-1] == null)
+		if (this.ships[x][y] == null)
 			return(Hit.MISS);
 		else {
-			this.ships[x-1][y-1].addStrike();
-			if (this.ships[x-1][y-1].isSunk())
-				switch(this.ships[x-1][y-1].getShip().getLabel()) {
+			this.ships[x][y].addStrike();
+			if (this.ships[x][y].isSunk())
+				switch(this.ships[x][y].getShip().getLabel()) {
 					case('D'):
 						return Hit.DESTROYER;
 					case('S'):
@@ -172,34 +180,34 @@ class Board implements IBoard {
 			return(Hit.STRIKE);
 		}
 	}
-	private String printLine(int x)
+	private String printLine(int i)
 	{
 		String res = "";
-		if (x<10)
-			{ res = Integer.toString(x) + "  "; }
+		if (i<10)
+			{ res = Integer.toString(i) + "  "; }
 		else
-			{ res = Integer.toString(x) + " "; }
+			{ res = Integer.toString(i) + " "; }
 
-		for (int y = 1; y <= this.boardSize; y++)
+		for (int y = 0; y < this.boardSize; y++)
 		{
 //			System.out.println(ships[x-1][y-1]);
-			if (ships[x-1][y-1] == null)
+			if (ships[i-1][y] == null)
 				res = res + ". ";
 			else
-				res = res + ships[x-1][y-1] + " ";
+				res = res + ships[i-1][y] + " ";
 		}
 
 		res = res + "    ";
 
-		if (x<10)
-			{ res = res + Integer.toString(x) + "  " ;}
+		if (i<10)
+			{ res = res + Integer.toString(i) + "  " ;}
 		else
-			{ res = res + Integer.toString(x) + " " ;}
+			{ res = res + Integer.toString(i) + " " ;}
 
-		for (int y = 1; y <= this.boardSize; y++) {
-				if (this.strikes[x-1][y-1] == null)
+		for (int y = 0; y < this.boardSize; y++) {
+				if (this.strikes[i-1][y] == null)
 					res = res + ". " ;
-				else if (this.strikes[x-1][y-1])
+				else if (this.strikes[i-1][y])
 					res = res + ColorUtil.colorize("X ", Color.RED) ;
 				else
 					res = res + "X " ;

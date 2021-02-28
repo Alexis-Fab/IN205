@@ -43,8 +43,8 @@ public final class InputHelper {
                     String coord = in[0];
                     if (Arrays.asList(validOrientations).contains(in[1])) {
                         res.orientation = in[1];
-                        res.y = coord.charAt(0) - 'a' + 1;
-                        res.x = Integer.parseInt(coord.substring(1, coord.length()));
+                        res.y = coord.charAt(0) - 'a';
+                        res.x = Integer.parseInt(coord.substring(1, coord.length())) - 1;
                         done = true;
                     }
                 }
@@ -69,8 +69,8 @@ public final class InputHelper {
         do {
             try {
                 String coord = sin.nextLine().toLowerCase();
-                res.y = coord.charAt(0) - 'a' + 1;
-                res.x = Integer.parseInt(coord.substring(1, coord.length()));
+                res.y = coord.charAt(0) - 'a';
+                res.x = Integer.parseInt(coord.substring(1, coord.length())) - 1;
                 done = true;
             } catch (Exception e) {
                 // nop

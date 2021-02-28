@@ -18,6 +18,15 @@ public interface IBoard {
     void putShip(AbstractShip ship, int x, int y) throws Exception;
 
     /**
+    * Put the given ship at the given position
+    * @param ship The ship to place on the board
+    * @param x
+    * @param y
+    * @param isForHuman disables console displays for IA placements
+    */
+    void putShip(AbstractShip ship, int x, int y, boolean isForHuman) throws Exception;
+
+    /**
      * Get if a ship is placed at the given position
      * @param x
      * @param y
@@ -48,4 +57,6 @@ public interface IBoard {
     * @return status for the hit (eg : strike or miss)
     */
     Hit sendHit(int x, int y);  
+
+    void print();
 }

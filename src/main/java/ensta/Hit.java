@@ -15,6 +15,8 @@ public enum Hit {
     private int value;
     private String label;
 
+    public int getValue() { return this.value ;}
+
     /* ***
      * Constructeur
      */
