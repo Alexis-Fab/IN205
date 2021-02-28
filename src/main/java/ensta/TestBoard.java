@@ -41,16 +41,17 @@ public class TestBoard
 		ai1.putShips(shipsArray);
 
 		ai1.printBoard();
+		int[] coords = new int[2];
 
 		for (int i=0; i<5; i++) {
 			System.out.println("tir n° " + i);
-			user1.sendHit();
+			user1.sendHit(coords);
 //			System.out.println(user1.opponentBoard.ships[5][6]);
-			if (user1.opponentBoard.ships[4][5] != null) {
+//			if (user1.opponentBoard.ships[4][5] != null) {
 //				System.out.println(user1.opponentBoard.ships[5][6].isStruck());
-				System.out.println(user1.opponentBoard.ships[4][5].isSunk());
-			}
-			System.out.println(user1.opponentBoard.hasShip(5,6));
+//				System.out.println(user1.opponentBoard.ships[4][5].isSunk());
+//			}
+//				System.out.println(user1.opponentBoard.hasShip(5,6));
 		}
 
 

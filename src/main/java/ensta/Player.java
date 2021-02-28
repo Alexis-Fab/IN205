@@ -73,8 +73,7 @@ public class Player {
         } while (!done);
     }
 
-    public Hit sendHit(/*int[] coords*/) {
-    // A-t-on vraiment besoin de coords si on fait appel à setHit dans sendHit ???
+    public Hit sendHit(int[] coords) {
         boolean done = false;
         Hit hit = null;
 
@@ -83,28 +82,35 @@ public class Player {
             InputHelper.CoordInput hitInput = InputHelper.readCoordInput();
             // TODO call sendHit on this.opponentBoard
 
-            if (this.board.getHit(hitInput.x, hitInput.y) == null) {
+            if (hitInput.x >= 0 && hitInput.x < this.board.getSize() && hitInput.y >= 0 && hitInput.y < this.board.getSize()) {
 
-                hit = this.opponentBoard.sendHit(hitInput.x, hitInput.y);
-                if (hit != Hit.MISS) {
-                    this.board.setHit(true, hitInput.x, hitInput.y);
-                    done = true;
+                if (this.board.getHit(hitInput.x, hitInput.y) == null) {
+
+                    hit = this.opponentBoard.sendHit(hitInput.x, hitInput.y);
+                    if (hit != Hit.MISS) {
+                        this.board.setHit(true, hitInput.x, hitInput.y);
+                        done = true;
+                    }
+                    else {
+                        this.board.setHit(false, hitInput.x, hitInput.y);
+                        done = true;
+                    }
+                    coords[0] = hitInput.x;
+                    coords[1] = hitInput.y;
                 }
                 else {
-                    this.board.setHit(false, hitInput.x, hitInput.y);
-                    done = true;
+                    System.out.println("Vous avez déjà tiré ici !");
                 }
             }
+                else 
+                    System.out.println("Veuillez frapper dans la grille");
 
-            else {
-                System.out.println("Vous avez déjà tiré ici !");
-            }
             // TODO : Game expects sendHit to return BOTH hit result & hit coords.
             // return hit is obvious. But how to return coords at the same time ?
         } while (!done);
 
-        this.board.print();
-        System.out.println(hit);
+//        this.board.print();
+//        System.out.println(hit);
         return hit;
     }
 

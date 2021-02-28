@@ -5,7 +5,7 @@ class Board implements IBoard {
 	public String name;
 	private int boardSize = 10;
 	private int nbShips = 5;
-	public ShipState[][] ships = new ShipState[boardSize][boardSize];
+	private ShipState[][] ships = new ShipState[boardSize][boardSize];
 	private Boolean[][] strikes = new Boolean[boardSize][boardSize];
 
 	public Board(String myName, int myBoardSize) {name = myName; this.boardSize = myBoardSize;

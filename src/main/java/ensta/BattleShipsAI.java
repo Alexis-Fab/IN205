@@ -139,7 +139,7 @@ public class BattleShipsAI implements Serializable {
         coords[0] = res[0];
         coords[1] = res[1];
 
-        System.out.println("IA hits at " + (char)(65 + coords[1]) + (coords[0]+1));
+//        System.out.println("IA hits at " + (char)(65 + coords[1]) + (coords[0]+1));
 
         return hit;
     }

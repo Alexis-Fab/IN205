@@ -5,9 +5,16 @@
 /home/alexis/Documents/IN205/bataille-navale/src/main/java/ensta/ships/AbstractShip.java
 /home/alexis/Documents/IN205/bataille-navale/src/main/java/ensta/ships/Carrier.java
 /home/alexis/Documents/IN205/bataille-navale/src/main/java/ensta/ships/Submarine.java
+/home/alexis/Documents/IN205/bataille-navale/src/main/java/ensta/BattleShipsAI.java
 /home/alexis/Documents/IN205/bataille-navale/src/main/java/ensta/ships/Battleship.java
 /home/alexis/Documents/IN205/bataille-navale/src/main/java/ensta/Board.java
 /home/alexis/Documents/IN205/bataille-navale/src/main/java/ensta/ships/Destroyer.java
 /home/alexis/Documents/IN205/bataille-navale/src/main/java/ensta/IBoard.java
+/home/alexis/Documents/IN205/bataille-navale/src/main/java/ensta/AIPlayer.java
+/home/alexis/Documents/IN205/bataille-navale/src/main/java/ensta/ColorUtil.java
+/home/alexis/Documents/IN205/bataille-navale/src/main/java/ensta/Color.java
+/home/alexis/Documents/IN205/bataille-navale/src/main/java/ensta/ships/ShipState.java
 /home/alexis/Documents/IN205/bataille-navale/src/main/java/ensta/Player.java
+/home/alexis/Documents/IN205/bataille-navale/src/main/java/ensta/TestGame.java
 /home/alexis/Documents/IN205/bataille-navale/src/main/java/ensta/TestBoard.java
+/home/alexis/Documents/IN205/bataille-navale/src/main/java/ensta/Game.java
