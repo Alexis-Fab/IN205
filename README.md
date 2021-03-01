@@ -47,7 +47,7 @@ HasShip renvoie bien false lorsque le navire sur place a été détruit.
 
 Exercice 7
 -
-Là encore, le putShips capture une exception dans le cas d’un placement impossible afin de tenter un nouveau placement aléatoire.
+Là encore, le putShips capture une exception dans le cas d’un placement impossible afin de tenter un nouveau placement aléatoire.\
 La méthode canPutShip n’est pas utilisée car j’ai déjà codé ce qu’elle fait dans la méthode putShips de Board.
 
 Exercice 8
@@ -57,5 +57,6 @@ makeHitMessage est modifié car le cas d’un bateau détruit est déjà pris en
 
 Versionning
 -
-J'ai rencontré un problème de fusion entre la branche main et la branche master qui s'est résolu en forçant la fusion de branche sans historique commun. J'ai donc ensuite supprimé la branche master.
+J'ai rencontré un problème de fusion entre la branche main et la branche master qui s'est résolu en forçant la fusion de branche sans historique commun.
+J'ai donc ensuite supprimé la branche master.
 
