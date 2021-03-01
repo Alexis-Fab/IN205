@@ -5,7 +5,7 @@ Projet Bataille Navale Fabrigoule Alexis
 
 Le sujet pdf demande à commenter nos fonctions mais les slides de présentation ainsi que les séances avant les vacances confirment qu’il n’est pas demandé de commenter nos fonctions. Il nous faut nous contenter de la javadoc, ce que j’ai fait.
 
-Pour compiler le projet, il faut se placer à la racine et taper :
+Pour compiler le projet, il faut se placer à la racine et taper :\
 mvn clean install exec:java
 
 Exercice 1
@@ -53,6 +53,12 @@ Exercice 8
 -
 Il est possible de choisir la taille de la grille. Le nombre de navire est fixé à cinq mais on pourrait facilement imaginer une version où on demander le nombre souhaité pour chaque type de navire.\
 makeHitMessage est modifié car le cas d’un bateau détruit est déjà pris en compte dans la méthode toString de Hit. Sinon cela affiche « Sous-marin coulé coulé ». Cela permet d’avoir facilement un tel affichage pour TestGame et TestBoard.
+
+Test
+-
+Quelques tests primitifs et peu pertinents ont été ajoutés dans le dossier de test.
+
+Problème rencontré : Le code fourni était prévupour l'utilisation de junit3. J'ai donc corrigé le pom.xml et adapté la structure de AppTest.java.
 
 Versionning
 -
