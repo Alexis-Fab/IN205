@@ -10,9 +10,10 @@ mvn clean install exec:java
 
 Exercice 1
 -
-Problème rencontré : changer la taille des tableaux strikes et ships lorsqu’on spécifie une taille inhabituelle dans l’initialisation du board. En effet, modifier l’attribut boardSize ne modifie pas strikes et ships. Par conséquent, j’ai redéfini ces deux tableaux dans le constructeur.\
 Pour la méthode print, j’ai opté pour un affichage des grilles côte à côte et de déléguer l’affichage de chaque ligne à une fonction auxiliaire nommé printLine.\
 Concernant l’encapsulation, on fait attention à rendre les attribut privés et de définir les getters et setters adéquats.
+
+Problème rencontré : changer la taille des tableaux strikes et ships lorsqu’on spécifie une taille inhabituelle dans l’initialisation du board. En effet, modifier l’attribut boardSize ne modifie pas strikes et ships. Par conséquent, j’ai redéfini ces deux tableaux dans le constructeur.
 
 Exercice 2
 -
