@@ -23,6 +23,7 @@ public interface IBoard {
     * @param x
     * @param y
     * @param isForHuman disables console displays for IA placements
+    * @throws Exception if placement could not be done
     */
     void putShip(AbstractShip ship, int x, int y, boolean isForHuman) throws Exception;
 

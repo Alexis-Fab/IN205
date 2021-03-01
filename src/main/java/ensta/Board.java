@@ -2,7 +2,7 @@ package ensta;
 import ensta.ships.*;
 
 class Board implements IBoard {
-	public String name;
+	private String name;
 	private int boardSize = 10;
 	private int nbShips = 5;
 	private ShipState[][] ships = new ShipState[boardSize][boardSize];
@@ -16,6 +16,8 @@ class Board implements IBoard {
 	public void setNbShips(int nb) { nbShips = nb ;}
 	public int getSize() { return boardSize ;}
 	public void setSize(int size) { boardSize = size ;}
+	public String getName() { return name ;}
+	public void setName(String myName) { name = myName ;}
 
 	/**
 	* Print a message on the console
@@ -185,6 +187,13 @@ class Board implements IBoard {
 			return(Hit.STRIKE);
 		}
 	}
+
+
+    /** Auxiliary function that prints a single line
+    *@param i the numbre of the line
+    * @return a string that contains the whole line for both own board and opponent board 
+    */
+
 	private String printLine(int i)
 	{
 		String res = "";
@@ -195,7 +204,6 @@ class Board implements IBoard {
 
 		for (int y = 0; y < this.boardSize; y++)
 		{
-//			System.out.println(ships[x-1][y-1]);
 			if (ships[i-1][y] == null)
 				res = res + ". ";
 			else
