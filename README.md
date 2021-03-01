@@ -10,10 +10,8 @@ mvn clean install exec:java
 
 Exercice 1
 -
-Problème rencontré : changer la taille des tableaux strikes et ships lorsqu’on spécifie une taille inhabituelle dans l’initialisation du board. En effet, modifier l’attribut boardSize ne modifie pas strikes et ships. Par conséquent, j’ai redéfini ces deux tableaux dans le constructeur.
-
-Pour la méthode print, j’ai opté pour un affichage des grilles côte à côte et de déléguer l’affichage de chaque ligne à une fonction auxiliaire nommé printLine.
-
+Problème rencontré : changer la taille des tableaux strikes et ships lorsqu’on spécifie une taille inhabituelle dans l’initialisation du board. En effet, modifier l’attribut boardSize ne modifie pas strikes et ships. Par conséquent, j’ai redéfini ces deux tableaux dans le constructeur.\
+Pour la méthode print, j’ai opté pour un affichage des grilles côte à côte et de déléguer l’affichage de chaque ligne à une fonction auxiliaire nommé printLine.\
 Concernant l’encapsulation, on fait attention à rendre les attribut privés et de définir les getters et setters adéquats.
 
 Exercice 2
@@ -24,8 +22,8 @@ Problème rencontré : Réussir à importer correctement le package ships ainsi
 
 Exercice 3
 -
-A ce stade, j’ai décidé de considérer les coordonnées strictement positive comme le rentrerait un joueur et de leur soustraire un lorsqu’on fait un appel à un tableau. Je reviendrai sur cette décision vers la fin du projet pour finalement soustraire un dès que le joueur entre des coordonnées.
-Dans le cas où le navire dépasse de la grille ou qu’il prend sur la place d’un navire déjà présent, on affiche un message adapté au problème rencontré et on renvoie une exception. Cette erreur sera traité par la fonction qui fait appel à putShip et permettra de demander de nouveau de rentrer un navire.
+A ce stade, j’ai décidé de considérer les coordonnées strictement positive comme le rentrerait un joueur et de leur soustraire un lorsqu’on fait un appel à un tableau. Je reviendrai sur cette décision vers la fin du projet pour finalement soustraire un dès que le joueur entre des coordonnées.\
+Dans le cas où le navire dépasse de la grille ou qu’il prend sur la place d’un navire déjà présent, on affiche un message adapté au problème rencontré et on renvoie une exception. Cette erreur sera traité par la fonction qui fait appel à putShip et permettra de demander de nouveau de rentrer un navire.\
 Il aura fallu modifier Iboard afin de pouvoir retourner une exception.
 
 Exercice 4
@@ -36,12 +34,12 @@ Problème rencontré : J’ai dû modifier InputHelper puisque j’avais pris l
 
 Exercice 5
 -
-J’ai eu du mal à comprendre pourquoi il fallait la méthode isSunk à la fois dans ShipState et dans AbstractShip. Cependant une fois l’obstacle de la compréhension passé, le reste c’est déroulé tout seul.
+J’ai eu du mal à comprendre pourquoi il fallait la méthode isSunk à la fois dans ShipState et dans AbstractShip. Cependant une fois l’obstacle de la compréhension passé, le reste c’est déroulé tout seul.\
 On change le tableau strikes pour qu’il stocke des Boolean au lieu de boolean ce qui permet de garder une valeur null.
 
 Exercice 6
 -
-Pour sendHit, nous n’avons pour l’instant pas besoin de stocker les coordonnées du tir puisque l’appel à setHit se fait en interne. Cependant les coordonnées serviront à l’affichage final dans la classe Game.java.
+Pour sendHit, nous n’avons pour l’instant pas besoin de stocker les coordonnées du tir puisque l’appel à setHit se fait en interne. Cependant les coordonnées serviront à l’affichage final dans la classe Game.java.\
 SendHit fait attention à ne pas autoriser un tir sur un emplacement déjà sélectionné auparavant.
 HasShip renvoie bien false lorsque le navire sur place a été détruit.
 
@@ -52,11 +50,10 @@ La méthode canPutShip n’est pas utilisée car j’ai déjà codé ce qu’ell
 
 Exercice 8
 -
-Il est possible de choisir la taille de la grille. Le nombre de navire est fixé à cinq mais on pourrait facilement imaginer une version où on demander le nombre souhaité pour chaque type de navire.
+Il est possible de choisir la taille de la grille. Le nombre de navire est fixé à cinq mais on pourrait facilement imaginer une version où on demander le nombre souhaité pour chaque type de navire.\
 makeHitMessage est modifié car le cas d’un bateau détruit est déjà pris en compte dans la méthode toString de Hit. Sinon cela affiche « Sous-marin coulé coulé ». Cela permet d’avoir facilement un tel affichage pour TestGame et TestBoard.
 
 Versionning
 -
-J'ai rencontré un problème de fusion entre la branche main et la branche master qui s'est résolu en forçant la fusion de branche sans historique commun.
+J'ai rencontré un problème de fusion entre la branche main et la branche master qui s'est résolu en forçant la fusion de branche sans historique commun.\
 J'ai donc ensuite supprimé la branche master.
-
