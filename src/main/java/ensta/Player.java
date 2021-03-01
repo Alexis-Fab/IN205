@@ -73,6 +73,10 @@ public class Player {
         } while (!done);
     }
 
+    /**
+    * @param coords save the coordonates of the hit
+    * @return the value of the hit. Useful to know whether it was succesful and to print the result 
+    */
     public Hit sendHit(int[] coords) {
         boolean done = false;
         Hit hit = null;

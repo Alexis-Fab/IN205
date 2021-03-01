@@ -26,26 +26,31 @@ public class AbstractShipTest
     }
 
     /**
-     * @return the suite of tests being tested
-     */
-/*    public static Test suite()
-    {
-        return new TestSuite( AbstractShipTest.class );
-    }
-
-    /**
      * Rigourous Test :-)
      */
     @Test
-    public void testApp()
+    public void testGetterSetter()
     {
-        AbstractShip ShipTest = new AbstractShip("ShipTest", 'D', 2, Orientation.WEST);
-        assertEquals(2, ShipTest.getLength());
+        AbstractShip shipTest = new AbstractShip("ShipTest", 'D', 2, Orientation.WEST);
+        assertEquals(2, shipTest.getLength());
         System.out.println("AbstractShip.getLength is operational");
-        assertEquals(Orientation.WEST, ShipTest.getOrientation());
+        assertEquals(Orientation.WEST, shipTest.getOrientation());
         System.out.println("AbstractShip.getOrientation is operational");
-        ShipTest.setOrientation(Orientation.NORTH);
-        assertEquals(Orientation.NORTH, ShipTest.getOrientation());
+        shipTest.setOrientation(Orientation.NORTH);
+        assertEquals(Orientation.NORTH, shipTest.getOrientation());
         System.out.println("AbstractShip.setOrientation is operational");
+    }
+
+    @Test
+    public void testShipsTypes() {
+        AbstractShip ship = new Destroyer();
+        assertEquals(ship.getLength(), 2);
+        ship = new Submarine();
+        assertEquals(ship.getLength(), 3);
+        ship = new Battleship();
+        assertEquals(ship.getLength(), 4);
+        ship = new Carrier();
+        assertEquals(ship.getLength(), 5);
+        System.out.println("Ship types have their lengths well initialized");
     }
 }

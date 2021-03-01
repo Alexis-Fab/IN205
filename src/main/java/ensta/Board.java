@@ -17,6 +17,11 @@ class Board implements IBoard {
 	public int getSize() { return boardSize ;}
 	public void setSize(int size) { boardSize = size ;}
 
+	/**
+	* Print a message on the console
+	* @param isForHuman permits to do not print when the ai use the method putShip
+	* @param msg
+	*/
 	private void printHelp(boolean isForHuman, String msg) {
 		if (isForHuman)
 			System.out.println(msg);

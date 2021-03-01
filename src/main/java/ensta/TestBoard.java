@@ -12,7 +12,7 @@ public class TestBoard
 		AbstractShip Kam2 = new Battleship("Kam2", Orientation.WEST);
 		try {
 			myBoard.putShip(Kam2, 5, 9);
-//			System.out.println("succesful placement");
+			System.out.println("succesful placement");
 		}
 		catch (Exception e) {System.out.println("placement failed");}
 		AbstractShip Kam3 = new Carrier("Kam3", Orientation.EAST);
@@ -46,12 +46,6 @@ public class TestBoard
 		for (int i=0; i<5; i++) {
 			System.out.println("tir n° " + i);
 			user1.sendHit(coords);
-//			System.out.println(user1.opponentBoard.ships[5][6]);
-//			if (user1.opponentBoard.ships[4][5] != null) {
-//				System.out.println(user1.opponentBoard.ships[5][6].isStruck());
-//				System.out.println(user1.opponentBoard.ships[4][5].isSunk());
-//			}
-//				System.out.println(user1.opponentBoard.hasShip(5,6));
 		}
 
 
