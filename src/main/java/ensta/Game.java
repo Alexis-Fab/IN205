@@ -35,6 +35,10 @@ public class Game {
 
             System.out.println("Entre la taille de grille : ");
             int boardSize = sin.nextInt();
+            while(boardSize <= 5) {
+                System.out.println("Veuillez choisir une taille supérieure à 5 :");
+                boardSize = sin.nextInt();
+            }
 
             // TODO init boards
             Board b1 = new Board("Board1", boardSize), b2 = new Board("Board2", boardSize);

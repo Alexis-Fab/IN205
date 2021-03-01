@@ -67,7 +67,7 @@ public class Player {
                 System.out.println("Veuillez de nouveau " + msg);
             }
 
-            done = i == this.board.getNbShips(); // I should adapt it to meet ship number
+            done = i == this.board.getNbShips();
 
             board.print();
         } while (!done);
