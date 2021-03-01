@@ -32,7 +32,7 @@ Exercice 4
 -
 A l’aide d’un try catch dans Player, on peut demander de placer un navire jusqu’à ce que ce dernier ait pu être correctement placé.
 
-Pb : J’ai dû modifier InputHelper puisque j’avais pris les conventions de coordonnées strictement positives et j’ai échangé les rôles de x et y. Je suis par la suite revenu sur le choix de coordonnées st. positives.
+Problème rencontré : J’ai dû modifier InputHelper puisque j’avais pris les conventions de coordonnées strictement positives et j’ai échangé les rôles de x et y. Je suis par la suite revenu sur le choix de coordonnées st. positives.
 
 Exercice 5
 -
